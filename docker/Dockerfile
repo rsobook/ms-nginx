@@ -19,4 +19,5 @@ ENV ABOUT_BASE_URL /api/v1/About
 ENV ABOUT_SERVCIE_URL ms-about
 ADD template.nginx.conf template.nginx.conf
 ADD run.sh run.sh
+RUN chmod 755 /run.sh
 CMD ["./run.sh"]
