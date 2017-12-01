@@ -40,8 +40,13 @@ spec:
               value: 'ms-wall'
 
             - name: CHATROOM_BASE_URL
+              value: '/api/v1/ChatRoom'
+            - name: CHATROOM_SERVCIE_URL
+              value: 'ms-chatroom'
+
+            - name: CHATRELAY_BASE_URL
               value: '/api/v1/ChatRelay'
-            - name: USER_SERVCIE_URL
+            - name: CHATRELAY_SERVCIE_URL
               value: 'ms-chatrelay'
 
             - name: USER_BASE_URL
