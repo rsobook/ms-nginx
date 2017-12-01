@@ -107,7 +107,7 @@ then
     #exit 1
 else
     printf "CHATROOM_SERVCIE_URL set to ${CHATROOM_SERVCIE_URL}.\n"
-    sed -i -e "s#CHATROOM#${CHATROOM_SERVCIE_URL}#g" ${NGINIXFILE}
+    sed -i -e "s#CHATROOM_SERVCIE_URL#${CHATROOM_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 ########################################
