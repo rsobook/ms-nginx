@@ -17,7 +17,7 @@ ENV USER_BASE_URL /api/v1/User
 ENV USER_SERVCIE_URL ms-user:5001
 ENV ABOUT_BASE_URL /api/v1/About
 ENV ABOUT_SERVCIE_URL ms-about
-ENV DOCKER true
+ENV RESOLVER 127.0.0.11
 ADD template.nginx.conf /bin/init/template.nginx.conf
 ADD run.sh /bin/init/run.sh
 RUN chmod 755 /bin/init/run.sh
