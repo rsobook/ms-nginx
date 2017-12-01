@@ -8,7 +8,7 @@ buildscript {
     }
 }
 
-version '2.0.5'
+version '2.0.6'
 
 apply plugin: 'com.bmuschko.docker-remote-api'
 
@@ -74,6 +74,9 @@ task dockerfileCreate(type: Dockerfile) {
 
     environmentVariable("ABOUT_BASE_URL", "/api/v1/About")
     environmentVariable("ABOUT_SERVCIE_URL", "ms-about")
+
+    environmentVariable("PET_BASE_URL", "/api/v1/Pet")
+    environmentVariable("PET_SERVCIE_URL", "ms-pet")
 
     environmentVariable("RESOLVER", "127.0.0.11")
 

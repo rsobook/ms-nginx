@@ -174,6 +174,27 @@ else
 fi
 
 ########################################
+### ABOUT API
+########################################
+if [[ -z "${PET_BASE_URL}" ]];
+then
+    printf 'You need to set ABOUT_BASE_URL.\n'
+    #exit 1
+else
+    printf "PET_BASE_URL set to ${PET_BASE_URL}.\n"
+    sed -i -e "s#PET_BASE_URL#${PET_BASE_URL}#g" ${NGINIXFILE}
+fi
+
+if [[ -z "${PET_SERVCIE_URL}" ]];
+then
+    printf 'You need to set PET_SERVCIE_URL.\n'
+    #exit 1
+else
+    printf "PET_SERVCIE_URL set to ${PET_SERVCIE_URL}.\n"
+    sed -i -e "s#PET_SERVCIE_URL#${PET_SERVCIE_URL}#g" ${NGINIXFILE}
+fi
+
+########################################
 ### DOCKER
 ########################################
 if [[ -z "${RESOLVER}"  ]];
