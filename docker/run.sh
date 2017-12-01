@@ -176,12 +176,13 @@ fi
 ########################################
 ### DOCKER
 ########################################
-if [[ "${DOCKER}" = "true" ]];
+if [[ -z "${RESOLVER}"  ]];
 then
-    printf "DOCKER set to ${DOCKER}.\n"
-    sed -i -e "s/#DOCKER //g" ${NGINIXFILE}
+    printf 'RESOLVER set to false or not set.\n'
 else
-    printf 'DOCKER set to false or not set.\n'
+    printf "RESOLVER set to ${RESOLVER}.\n"
+    sed -i -e "s#RESOLVER#${RESOLVER}#g" ${NGINIXFILE}
+    sed -i -e "s/#RES# //g" ${NGINIXFILE}
 fi
 
 ########################################

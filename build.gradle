@@ -8,7 +8,7 @@ buildscript {
     }
 }
 
-version '2.0.2'
+version '2.0.3'
 
 apply plugin: 'com.bmuschko.docker-remote-api'
 
@@ -75,7 +75,7 @@ task dockerfileCreate(type: Dockerfile) {
     environmentVariable("ABOUT_BASE_URL", "/api/v1/About")
     environmentVariable("ABOUT_SERVCIE_URL", "ms-about")
 
-    environmentVariable("DOCKER", "true")
+    environmentVariable("RESOLVER", "127.0.0.11")
 
     addFile("template.nginx.conf", "/bin/init/template.nginx.conf")
     addFile("run.sh", "/bin/init/run.sh")

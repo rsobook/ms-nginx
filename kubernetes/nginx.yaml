@@ -13,7 +13,7 @@ spec:
         app: ms-nginx
     spec:
       containers:
-        - image: rsobook/ms-nginx:2.0.1
+        - image: rsobook/ms-nginx:2.0.3
           name: ms-nginx
           env:
             - name: PORT
@@ -59,8 +59,8 @@ spec:
             - name: ABOUT_SERVCIE_URL
               value: 'ms-about'
 
-            - name: DOCKER
-              value: 'false'
+            - name: RESOLVER
+              value: '10.0.0.10 valid=10s'
 
           ports:
           - containerPort: 5432
