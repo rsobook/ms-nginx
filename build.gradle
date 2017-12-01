@@ -75,6 +75,8 @@ task dockerfileCreate(type: Dockerfile) {
     environmentVariable("ABOUT_BASE_URL", "/api/v1/About")
     environmentVariable("ABOUT_SERVCIE_URL", "ms-about")
 
+    environmentVariable("DOCKER", "true")
+
     addFile("template.nginx.conf", "/bin/init/template.nginx.conf")
     addFile("run.sh", "/bin/init/run.sh")
 

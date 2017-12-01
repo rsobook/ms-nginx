@@ -59,6 +59,9 @@ spec:
             - name: ABOUT_SERVCIE_URL
               value: 'ms-about'
 
+            - name: DOCKER
+              value: 'false'
+
           ports:
           - containerPort: 5432
             protocol: TCP

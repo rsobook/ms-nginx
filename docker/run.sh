@@ -2,7 +2,7 @@
 
 NGINIXFILE='/bin/init/nginx.conf'
 
-cp /bin/init/template.nginx.conf /bin/init/nginx.conf
+cp /bin/init/template.nginx.conf ${NGINIXFILE}
 
 ########################################
 ### IMAGE API
@@ -171,6 +171,17 @@ then
 else
     printf "ABOUT_SERVCIE_URL set to ${ABOUT_SERVCIE_URL}.\n"
     sed -i -e "s#ABOUT_SERVCIE_URL#${ABOUT_SERVCIE_URL}#g" ${NGINIXFILE}
+fi
+
+########################################
+### DOCKER
+########################################
+if [[ "${DOCKER}" = "true" ]];
+then
+    printf "DOCKER set to ${DOCKER}.\n"
+    sed -i -e "s/#DOCKER //g" ${NGINIXFILE}
+else
+    printf 'DOCKER set to false or not set.\n'
 fi
 
 ########################################
