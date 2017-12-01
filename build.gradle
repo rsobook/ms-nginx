@@ -1,0 +1,155 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-docker-plugin:3.2.0'
+    }
+}
+
+version '2.0.0'
+
+apply plugin: 'com.bmuschko.docker-remote-api'
+
+ext {
+    dockerHubUser =  project.hasProperty('DOCKER_HUB_USER') ? DOCKER_HUB_USER : System.getenv('DOCKER_HUB_USER')
+    dockerHubEmail =  project.hasProperty('DOCKER_HUB_EMAIL') ? DOCKER_HUB_EMAIL : System.getenv('DOCKER_HUB_EMAIL')
+    dockerHubPassword =  project.hasProperty('DOCKER_HUB_PASSWORD') ? DOCKER_HUB_PASSWORD : System.getenv('DOCKER_HUB_PASSWORD')
+
+    port = "80"
+    dockerHostname = 'database.rsobook.fri.si'
+    dockerImageName = String.format("%s/%s", dockerHubUser, project.name)
+    dockerImageTag = String.format("%s:%s", dockerImageName, version)
+    dockerContainerName = String.format("%s", project.name)
+}
+
+/**
+ * DOCKER TASKS
+ */
+
+import com.bmuschko.gradle.docker.tasks.container.*
+import com.bmuschko.gradle.docker.tasks.image.*
+
+docker {
+    registryCredentials {
+        url = 'https://hub.docker.com/'
+        email = dockerHubEmail
+        password = dockerHubPassword
+        username = dockerHubUser
+    }
+}
+
+task dockerfileCreate(type: Dockerfile) {
+    group 'docker'
+    destFile = project.file('docker/Dockerfile')
+
+    from 'nginx:1.13.7'
+    maintainer 'Jan Gasperlin "jg1724@student.uni-lj.si"'
+
+    exposePort {
+        String.format("%s:%s", port, port)
+    }
+
+    environmentVariable("IMAGES_BASE_URL", "/api/v1/Images")
+    environmentVariable("IMAGES_SERVCIE_URL", "ms-images")
+
+    environmentVariable("FRIENDS_BASE_URL", "/api/v1/Friends")
+    environmentVariable("FRIENDS_SERVCIE_URL", "ms-friends")
+
+    environmentVariable("ADS_BASE_URL", "/api/v1/Ads")
+    environmentVariable("ADS_SERVCIE_URL", "ms-ads")
+
+    environmentVariable("WALL_BASE_URL", "/api/v1/Wall")
+    environmentVariable("WALL_SERVCIE_URL", "ms-wall")
+
+    environmentVariable("CHATROOM_BASE_URL", "/api/v1/ChatRoom")
+    environmentVariable("CHATROOM_SERVCIE_URL", "ms-chatroom")
+
+    environmentVariable("CHATRELAY_BASE_URL", "/api/v1/ChatRelay")
+    environmentVariable("CHATRELAY_SERVCIE_URL", "ms-chatrelay")
+
+    environmentVariable("USER_BASE_URL", "/api/v1/User")
+    environmentVariable("USER_SERVCIE_URL", "ms-user:5001")
+
+    environmentVariable("ABOUT_BASE_URL", "/api/v1/About")
+    environmentVariable("ABOUT_SERVCIE_URL", "ms-about")
+
+    addFile("template.nginx.conf", "template.nginx.conf")
+    addFile("run.sh", "run.sh")
+
+    defaultCommand("./run.sh")
+}
+
+task containerStop(type: DockerStopContainer) {
+    group 'docker'
+    targetContainerId {
+        dockerContainerName
+    }
+    onError {
+        error -> println error.toString()
+    }
+}
+
+task containerRemove(type: DockerRemoveContainer) {
+    group 'docker'
+    dependsOn containerStop
+    targetContainerId {
+        dockerContainerName
+    }
+    onError {
+        error -> println error.toString()
+    }
+}
+
+task imageRemove(type: DockerRemoveImage) {
+    group 'docker'
+    dependsOn containerRemove
+    imageId dockerImageTag
+    onError {
+        error -> println error.toString()
+    }
+}
+
+task imageBuild(type: DockerBuildImage) {
+    group 'docker'
+    dependsOn imageRemove
+    dependsOn dockerfileCreate
+    inputDir = dockerfileCreate.destFile.parentFile
+    tag = dockerImageTag
+    noCache = true
+}
+
+task imagePushToDockerHub(type: DockerPushImage){
+    group 'docker'
+    imageName = dockerImageName
+    tag = version
+}
+
+task containerCreate(type: DockerCreateContainer) {
+    group 'docker'
+    dependsOn imageBuild
+    targetImageId {
+        dockerImageTag
+    }
+    containerName = dockerContainerName
+    portBindings = [String.format("5%s:%s", port, port)]
+    hostName = dockerHostname
+    network = 'rsonetwork'
+}
+
+task containerStart(type: DockerStartContainer) {
+    group 'docker'
+    targetContainerId {
+        dockerContainerName
+    }
+}
+
+task dockerBootstrap() {
+    group 'docker'
+    dependsOn containerCreate
+    dependsOn containerStart
+    containerCreate.finalizedBy containerStart
+}
+
+

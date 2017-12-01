@@ -1,0 +1,59 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ms-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-nginx
+  template:
+    metadata:
+      labels:
+        app: ms-nginx
+    spec:
+      containers:
+        - image: rsobook/ms-nginx:2.0.0
+          name: ms-nginx
+          env:
+            - name: PORT
+              value: '80'
+
+            - name: IMAGES_BASE_URL
+              value: '/api/v1/Images'
+            - name: IMAGES_SERVCIE_URL
+              value: 'ms-images'
+
+            - name: FRIENDS_BASE_URL
+              value: '/api/v1/Friends'
+            - name: FRIENDS_SERVCIE_URL
+              value: 'ms-friends'
+
+            - name: ADS_BASE_URL
+              value: '/api/v1/Ads'
+            - name: ADS_SERVCIE_URL
+              value: 'ms-ads'
+
+            - name: WALL_BASE_URL
+              value: '/api/v1/Wall'
+            - name: WALL_SERVCIE_URL
+              value: 'ms-wall'
+
+            - name: CHATROOM_BASE_URL
+              value: '/api/v1/ChatRelay'
+            - name: USER_SERVCIE_URL
+              value: 'ms-chatrelay'
+
+            - name: USER_BASE_URL
+              value: '/api/v1/User'
+            - name: USER_SERVCIE_URL
+              value: 'ms-user'
+
+            - name: ABOUT_BASE_URL
+              value: '/api/v1/About'
+            - name: ABOUT_SERVCIE_URL
+              value: 'ms-about'
+
+          ports:
+          - containerPort: 5432
+            protocol: TCP
