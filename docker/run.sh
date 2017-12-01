@@ -1,5 +1,8 @@
 #!/bin/bash
-cp ./template.nginx.conf ./nginx.conf
+
+NGINIXFILE='/bin/init/nginx.conf'
+
+cp /bin/init/template.nginx.conf /bin/init/nginx.conf
 
 ########################################
 ### IMAGE API
@@ -10,8 +13,7 @@ then
     #exit 1
 else
     printf "IMAGES_BASE_URL set to ${IMAGES_BASE_URL}.\n"
-    sed -i -e "s#IMAGES_BASE_URL#${IMAGES_BASE_URL}#g" nginx.conf
-    sed -i -e "s/#IMAGES //g" nginx.conf
+    sed -i -e "s#IMAGES_BASE_URL#${IMAGES_BASE_URL}#g" ${NGINIXFILE}
 fi
 
 if [[ -z "${IMAGES_SERVCIE_URL}" ]];
@@ -20,7 +22,7 @@ then
     #exit 1
 else
     printf "IMAGES_SERVCIE_URL set to ${IMAGES_SERVCIE_URL}.\n"
-    sed -i -e "s#IMAGES_SERVCIE_URL#${IMAGES_SERVCIE_URL}#g" nginx.conf
+    sed -i -e "s#IMAGES_SERVCIE_URL#${IMAGES_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 ########################################
@@ -32,8 +34,7 @@ then
     #exit 1
 else
     printf "FRIENDS_BASE_URL set to ${FRIENDS_BASE_URL}.\n"
-    sed -i -e "s#FRIENDS_BASE_URL#${FRIENDS_BASE_URL}#g" nginx.conf
-    sed -i -e "s/#FRIENDS //g" nginx.conf
+    sed -i -e "s#FRIENDS_BASE_URL#${FRIENDS_BASE_URL}#g" ${NGINIXFILE}
 fi
 
 if [[ -z "${FRIENDS_SERVCIE_URL}" ]];
@@ -42,7 +43,7 @@ then
     #exit 1
 else
     printf "FRIENDS_SERVCIE_URL set to ${FRIENDS_SERVCIE_URL}.\n"
-    sed -i -e "s#FRIENDS_SERVCIE_URL#${FRIENDS_SERVCIE_URL}#g" nginx.conf
+    sed -i -e "s#FRIENDS_SERVCIE_URL#${FRIENDS_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 
@@ -55,8 +56,7 @@ then
     #exit 1
 else
     printf "FRIENDS_SERVCIE_URL set to ${FRIENDS_SERVCIE_URL}.\n"
-    sed -i -e "s#ADS_BASE_URL#${ADS_BASE_URL}#g" nginx.conf
-    sed -i -e "s/#ADS //g" nginx.conf
+    sed -i -e "s#ADS_BASE_URL#${ADS_BASE_URL}#g" ${NGINIXFILE}
 fi
 
 if [[ -z "${ADS_SERVCIE_URL}" ]];
@@ -65,7 +65,7 @@ then
     #exit 1
 else
     printf "ADS_SERVCIE_URL set to ${ADS_SERVCIE_URL}.\n"
-    sed -i -e "s#ADS_SERVCIE_URL#${ADS_SERVCIE_URL}#g" nginx.conf
+    sed -i -e "s#ADS_SERVCIE_URL#${ADS_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 ########################################
@@ -77,8 +77,7 @@ then
     #exit 1
 else
     printf "WALL_BASE_URL set to ${WALL_BASE_URL}.\n"
-    sed -i -e "s#WALL_BASE_URL#${WALL_BASE_URL}#g" nginx.conf
-    sed -i -e "s/#WALL //g" nginx.conf
+    sed -i -e "s#WALL_BASE_URL#${WALL_BASE_URL}#g" ${NGINIXFILE}
 fi
 
 if [[ -z "${WALL_SERVCIE_URL}" ]];
@@ -87,7 +86,7 @@ then
     #exit 1
 else
     printf "WALL_SERVCIE_URL set to ${WALL_SERVCIE_URL}"
-    sed -i -e "s#WALL_SERVCIE_URL#${WALL_SERVCIE_URL}#g" nginx.conf
+    sed -i -e "s#WALL_SERVCIE_URL#${WALL_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 ########################################
@@ -99,8 +98,7 @@ then
     #exit 1
 else
     printf "CHATROOM_BASE_URL set to ${CHATROOM_BASE_URL}.\n"
-    sed -i -e "s#CHATROOM_BASE_URL#${CHATROOM_BASE_URL}#g" nginx.conf
-    sed -i -e "s/#CHATROOM //g" nginx.conf
+    sed -i -e "s#CHATROOM_BASE_URL#${CHATROOM_BASE_URL}#g" ${NGINIXFILE}
 fi
 
 if [[ -z "${CHATROOM_SERVCIE_URL}" ]];
@@ -109,7 +107,7 @@ then
     #exit 1
 else
     printf "CHATROOM_SERVCIE_URL set to ${CHATROOM_SERVCIE_URL}.\n"
-    sed -i -e "s#CHATROOM#${CHATROOM_SERVCIE_URL}#g" nginx.conf
+    sed -i -e "s#CHATROOM#${CHATROOM_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 ########################################
@@ -121,8 +119,7 @@ then
     #exit 1
 else
     printf "CHATRELAY_BASE_URL set to ${CHATRELAY_BASE_URL}.\n"
-    sed -i -e "s#CHATRELAY_BASE_URL#${CHATRELAY_BASE_URL}#g" nginx.conf
-    sed -i -e "s/#CHATRELAY //g" nginx.conf
+    sed -i -e "s#CHATRELAY_BASE_URL#${CHATRELAY_BASE_URL}#g" ${NGINIXFILE}
 fi
 
 if [[ -z "${CHATRELAY_SERVCIE_URL}" ]];
@@ -131,7 +128,7 @@ then
     #exit 1
 else
     printf "CHATRELAY_SERVCIE_URL set to ${CHATRELAY_SERVCIE_URL}.\n"
-    sed -i -e "s#CHATRELAY_SERVCIE_URL#${CHATRELAY_SERVCIE_URL}#g" nginx.conf
+    sed -i -e "s#CHATRELAY_SERVCIE_URL#${CHATRELAY_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 ########################################
@@ -143,8 +140,7 @@ then
     #exit 1
 else
     printf "USER_BASE_URL set to ${USER_BASE_URL}.\n"
-    sed -i -e "s#USER_BASE_URL#${USER_BASE_URL}#g" nginx.conf
-    sed -i -e "s/#USER //g" nginx.conf
+    sed -i -e "s#USER_BASE_URL#${USER_BASE_URL}#g" ${NGINIXFILE}
 fi
 
 if [[ -z "${USER_SERVCIE_URL}" ]];
@@ -153,7 +149,7 @@ then
     #exit 1
 else
     printf "USER_SERVCIE_URL set to ${USER_SERVCIE_URL}.\n"
-    sed -i -e "s#USER_SERVCIE_URL#${USER_SERVCIE_URL}#g" nginx.conf
+    sed -i -e "s#USER_SERVCIE_URL#${USER_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 ########################################
@@ -165,8 +161,7 @@ then
     #exit 1
 else
     printf "ABOUT_BASE_URL set to ${ABOUT_BASE_URL}.\n"
-    sed -i -e "s#ABOUT_BASE_URL#${ABOUT_BASE_URL}#g" nginx.conf
-    sed -i -e "s/#ABOUT //g" nginx.conf
+    sed -i -e "s#ABOUT_BASE_URL#${ABOUT_BASE_URL}#g" ${NGINIXFILE}
 fi
 
 if [[ -z "${ABOUT_SERVCIE_URL}" ]];
@@ -175,15 +170,15 @@ then
     #exit 1
 else
     printf "ABOUT_SERVCIE_URL set to ${ABOUT_SERVCIE_URL}.\n"
-    sed -i -e "s#ABOUT_SERVCIE_URL#${ABOUT_SERVCIE_URL}#g" nginx.conf
+    sed -i -e "s#ABOUT_SERVCIE_URL#${ABOUT_SERVCIE_URL}#g" ${NGINIXFILE}
 fi
 
 ########################################
 ### START NGINX
 ########################################
-cat nginx.conf
+cat ${NGINIXFILE}
 
-cp nginx.conf /etc/nginx/nginx.conf
+cp ${NGINIXFILE} /etc/nginx/nginx.conf
 
 printf 'Starting Nginx .. \n'
 

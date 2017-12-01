@@ -75,12 +75,12 @@ task dockerfileCreate(type: Dockerfile) {
     environmentVariable("ABOUT_BASE_URL", "/api/v1/About")
     environmentVariable("ABOUT_SERVCIE_URL", "ms-about")
 
-    addFile("template.nginx.conf", "template.nginx.conf")
-    addFile("run.sh", "run.sh")
+    addFile("template.nginx.conf", "/bin/init/template.nginx.conf")
+    addFile("run.sh", "/bin/init/run.sh")
 
-    runCommand("chmod 755 /run.sh")
+    runCommand("chmod 755 /bin/init/run.sh")
 
-    defaultCommand("./run.sh")
+    defaultCommand("./bin/init/run.sh")
 }
 
 task containerStop(type: DockerStopContainer) {

@@ -17,7 +17,7 @@ ENV USER_BASE_URL /api/v1/User
 ENV USER_SERVCIE_URL ms-user:5001
 ENV ABOUT_BASE_URL /api/v1/About
 ENV ABOUT_SERVCIE_URL ms-about
-ADD template.nginx.conf template.nginx.conf
-ADD run.sh run.sh
-RUN chmod 755 /run.sh
-CMD ["./run.sh"]
+ADD template.nginx.conf /bin/init/template.nginx.conf
+ADD run.sh /bin/init/run.sh
+RUN chmod 755 /bin/init/run.sh
+CMD ["./bin/init/run.sh"]
