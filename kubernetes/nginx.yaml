@@ -22,50 +22,50 @@ spec:
             - name: IMAGES_BASE_URL
               value: '/api/v1/Images'
             - name: IMAGES_SERVCIE_URL
-              value: 'ms-images.default.svc.cluster.local'
+              value: '10.35.242.75'
 
             - name: FRIENDS_BASE_URL
               value: '/api/v1/Friends'
             - name: FRIENDS_SERVCIE_URL
-              value: 'ms-friends.default.svc.cluster.local'
+              value: '10.35.250.87'
 
             - name: ADS_BASE_URL
               value: '/api/v1/Ads'
             - name: ADS_SERVCIE_URL
-              value: 'ms-ads.default.svc.cluster.local'
+              value: '10.35.252.149'
 
             - name: WALL_BASE_URL
               value: '/api/v1/Wall'
             - name: WALL_SERVCIE_URL
-              value: 'ms-wall.default.svc.cluster.local'
+              value: '10.35.249.11'
 
             - name: CHATROOM_BASE_URL
               value: '/api/v1/ChatRoom'
             - name: CHATROOM_SERVCIE_URL
-              value: 'ms-chatroom.default.svc.cluster.local'
+              value: '10.35.248.227'
 
             - name: CHATRELAY_BASE_URL
               value: '/api/v1/ChatRelay'
             - name: CHATRELAY_SERVCIE_URL
-              value: 'ms-chatrelay.default.svc.cluster.local'
+              value: '10.35.249.207'
 
             - name: USER_BASE_URL
               value: '/api/v1/User'
             - name: USER_SERVCIE_URL
-              value: 'ms-user.default.svc.cluster.local'
+              value: '10.35.249.102'
 
             - name: ABOUT_BASE_URL
               value: '/api/v1/About'
             - name: ABOUT_SERVCIE_URL
-              value: 'ms-about.default.svc.cluster.local'
+              value: '10.35.248.127'
 
             - name: PET_BASE_URL
               value: '/api/v1/Pet'
             - name: PET_SERVCIE_URL
-              value: 'ms-pet.default.svc.cluster.local'
+              value: '10.35.243.98'
 
             - name: RESOLVER
-              value: '172.21.0.10 valid=10s'
+              value: '10.0.0.10 valid=10s'
 
           ports:
           - containerPort: 80
