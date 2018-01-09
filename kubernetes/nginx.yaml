@@ -13,7 +13,7 @@ spec:
         app: ms-nginx
     spec:
       containers:
-        - image: rsobook/ms-nginx:2.0.6
+        - image: rsobook/ms-nginx:2.0.7
           name: ms-nginx
           env:
             - name: PORT
@@ -68,5 +68,5 @@ spec:
               value: '172.21.0.10 valid=10s'
 
           ports:
-          - containerPort: 5432
+          - containerPort: 80
             protocol: TCP
